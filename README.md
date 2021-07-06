@@ -1,5 +1,5 @@
 # Intern API
-Simple API for sandbox tasks
+Simple REST API for sandbox tasks
 
 ## Routes
 ### GET
