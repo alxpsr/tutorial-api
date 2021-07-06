@@ -1,5 +1,7 @@
+const { response } = require('express');
 const express = require('express');
 const emoji = require('node-emoji');
+const MOCK_USERS = require('./users.json');
 
 const app = express();
 const PORT = 3000;
@@ -15,6 +17,14 @@ let users = [];
 app.get('/users', (request, response) => {
     response.json(users);
 });
+
+app.get('/init', (req, res) => {
+    MOCK_USERS.forEach(u => {
+        createNewUser(u);
+    })
+
+    res.json(users);
+})
 
 app.get('/users/:id', (request, response) => {
     const userId = Number(request.params.id);
@@ -36,6 +46,17 @@ app.post('/users', (request, response) => {
     } else {
         response.status(400).send("Request DTO must have ['name', 'surname', 'patronymic', 'dateBirth', 'gender'] fields");
     }
+})
+
+app.post('/reset', (request, response) => {
+    if (request.body && request.body.sure) {
+        users = [];
+        response.json(users);
+
+        return;
+    }
+
+    response.status(400).send('Need confirm');
 })
 
 app.listen(PORT, () => {

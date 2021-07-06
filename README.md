@@ -1,6 +1,32 @@
-# tutorial-api
-Simple NodeJS API for some tutorials
+# Intern API
+Simple API for sandbox tasks
 
-- `npm i`
-- `node server` or 
-- build via docker: `docker build -t tutorial-api . && docker run -p 1337:3000 -d tutorial-api`
+## Routes
+### GET
+- `/` - main route
+- `/users` - users collection
+- `/users/:id` - user by id
+
+### POST
+- `/users`
+
+REQUEST-DTO
+```
+{
+    name: string;
+    surname: string;
+    patronymic: string;
+    dateBirth: Date;
+    gender: string;
+}
+```
+RESPONSE-DTO
+```
+{
+    id: number;
+    fullName: string;
+    dateBirth: Date;
+    gender: string;
+    avatar: string;
+}
+```
